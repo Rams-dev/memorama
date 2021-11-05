@@ -7,17 +7,18 @@ export function useCharacter(){
     const {characters, setCharacters, isLoading, setIsLoading, selected, setSelected} = useContext(CharacterContext)
 
     useEffect(() => {
+        setIsLoading(true)
         getCharacter()
-    },[characters])
+        setIsLoading(false)
+
+    },[])
 
     const getCharacter = () => {
-        setIsLoading(true)
-        GetCharacter().then(res => setCharacters(res))
-        setIsLoading(false)
+        GetCharacter().then(res => setCharacters([...res,...res]))
     }
 
     const updateCharacter = (characterDelete) => {
-        characters.filter(singleCharacter => singleCharacter != characterDelete)
+        return characters.filter(singleCharacter => singleCharacter.id != characterDelete)
 
     }
 

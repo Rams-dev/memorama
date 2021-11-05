@@ -1,12 +1,16 @@
 import { useCharacter } from "../hooks/useCharacter"
 import ListOfCards from "../components/ListOfCharacters"
 import { useCardSelected } from "../hooks/useCardSelected"
+import LoadingComponent from "../components/LoadingComponent"
 
 export default function Home(){
-    const {selectedId} = useCardSelected()
-    let {characters, isLoading} = useCharacter(selectedId)
-    console.log(selectedId)
-    characters = [...characters,...characters]
+    // const {selectedId} = useCardSelected()
+    let {characters, isLoading} = useCharacter()
+    console.log(characters);
+    if(isLoading){
+      return <LoadingComponent/> 
+    }
+
     return (
      <>
 

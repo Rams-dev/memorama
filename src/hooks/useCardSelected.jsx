@@ -19,7 +19,7 @@ export function useCardSelected(){
     const compare = (value1, value2) => {
         if(value1 == value2){
             alert("son iguales")
-            // updateCharacter(value1)
+            updateCharacter(value1)
         }else{
             alert("no son iguales")
         }
