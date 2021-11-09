@@ -1,4 +1,4 @@
-import {useContext, useEffect} from 'react'
+import {useCallback, useContext} from 'react'
 import CharacterContext  from '../context/CharacterContext'
 import { GetCharacter } from '../services/GetCharacters'
 
@@ -6,29 +6,32 @@ import { GetCharacter } from '../services/GetCharacters'
 export function useCharacter(){
     const {characters, setCharacters, isLoading, setIsLoading, selected, setSelected} = useContext(CharacterContext)
 
-    useEffect(() => {
-        setIsLoading(true)
-        getCharacter()
-        setIsLoading(false)
-
-    },[])
-
     const getCharacter = () => {
-        GetCharacter().then(res => setCharacters([...res,...res]))
+        setIsLoading(true)
+        GetCharacter().then(res =>{
+            
+            // for(let i = 0; i < res.length; i++){
+            //     if( i > 20 ){
+            //         res[i].id = res[i].id + 20
+            //     }
+            // }
+            setCharacters(res)
+            setIsLoading(false)
+        }) 
     }
 
+    
     const updateCharacter = (characterDelete) => {
-        return characters.filter(singleCharacter => singleCharacter.id != characterDelete)
-
+        setCharacters(characters.filter(singleCharacter => singleCharacter.id !== characterDelete))
     }
 
     return {
         characters,
         setCharacters,
         isLoading,
-        getCharacter,
         setSelected,
         selected,
+        getCharacter,
         updateCharacter
     }
 

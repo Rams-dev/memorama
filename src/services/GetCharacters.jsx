@@ -6,8 +6,10 @@ export function GetCharacter(){
     return fetch(endpointCharacter)
     .then(response => response.json())
     .then(data => {
-        return data.results
-    })
+        let arr = [...data.results, ...data.results]
 
-    
+
+        return arr
+    })
 }
+

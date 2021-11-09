@@ -6,7 +6,7 @@ const Context = createContext({})
 export function CharacterContextProvider({children}){
     const [characters, setCharacters] = useState([])
     const [isLoading, setIsLoading] = useState(false)
-    const [selected, setSelected] = useState()
+    const [selected, setSelected] = useState([])
     return <Context.Provider value={{
             isLoading, setIsLoading, characters, setCharacters, setSelected, selected
         }}
